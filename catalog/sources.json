@@ -1,0 +1,750 @@
+{
+  "publisher": {
+    "name": "City of Manassas GIS",
+    "provider_name": "City of Manassas GIS — data publisher (not a routing determination)",
+    "jurisdiction": "City-published dataset; location/provider jurisdiction not individually verified",
+    "map_jurisdiction": "City-published map; eligibility and address-specific service not independently verified",
+    "arcgis_org_id": "3wpOgOChiWXPeFWB",
+    "arcgis_services_url": "https://services1.arcgis.com/3wpOgOChiWXPeFWB/arcgis/rest/services/",
+    "hub_url": "https://gis-cityofmanassas.hub.arcgis.com",
+    "faq_url": "https://gis-cityofmanassas.hub.arcgis.com/pages/faqs",
+    "user_agent": "Manassas-service-guide/1.0",
+    "terms": "Public query access is not public-domain status or a redistribution license. Consult publisher FAQ, item terms and attribution; jurisdiction, operational currency and reuse rights are not individually verified."
+  },
+  "links": {
+    "trash_guidance": "https://www.manassasva.gov/public_works/trash___recycling/index.php",
+    "yard_waste": "https://www.manassasva.gov/public_works/trash___recycling/yard_waste.php",
+    "leaf_lookup": "https://cityofmanassas.maps.arcgis.com/apps/instant/lookup/index.html?appid=39c57f5be60c4a2eb450601e0ae9e6f4"
+  },
+  "discovery": {
+    "services": [
+      "Manassas_Bulk_Waste_Collection",
+      "Food_Resources_WFL1",
+      "Parks_Manassas",
+      "Manassas_WalkingTrails",
+      "Bike_Facilities_and_Racks",
+      "Transportation_Projects",
+      "Transportation_Project_Line",
+      "Pools",
+      "MS4_Watershed",
+      "Adopt_a_Street_vw"
+    ],
+    "pages": {
+      "index": "https://www.manassasva.gov/public_works/trash___recycling/index.php",
+      "yard_waste": "https://www.manassasva.gov/public_works/trash___recycling/yard_waste.php",
+      "trash": "https://www.manassasva.gov/public_works/trash___recycling/trash.php",
+      "bulk_waste___large_items": "https://www.manassasva.gov/public_works/trash___recycling/bulk_waste___large_items.php"
+    },
+    "org_search_terms": "trash OR waste OR refuse OR recycling OR collection"
+  },
+  "url_detail_fields": [
+    "Website2",
+    "AGENCYURL"
+  ],
+  "date_detail_fields": [
+    "INCIDENTDATE",
+    "REPAIRDATE",
+    "LASTUPDATE"
+  ],
+  "field_labels": {
+    "FULLSTREET": "Full street name",
+    "NAME": "Name",
+    "Name": "Name",
+    "PREFIX": "Street prefix",
+    "TYPE": "Street type",
+    "SUFFIX": "Street suffix",
+    "ZIPL": "Left-side ZIP code",
+    "ZIPR": "Right-side ZIP code",
+    "L_F_ADD": "Left address range — from",
+    "L_T_ADD": "Left address range — to",
+    "R_F_ADD": "Right address range — from",
+    "R_T_ADD": "Right address range — to",
+    "SPEEDLIMIT": "Published speed limit (unit not specified)",
+    "Address2": "Address",
+    "City": "City",
+    "State": "State",
+    "Zip": "ZIP code",
+    "Phone": "Published phone",
+    "PHONE": "Published phone",
+    "LOCDESC": "Location",
+    "BREAKLEAK_TYPE": "Published break / leak type",
+    "INCIDENTDATE": "Historical incident date (UTC)",
+    "REPAIRDATE": "Historical repair date (UTC)",
+    "Location": "Location",
+    "DischType": "Discharge type",
+    "Material": "Material",
+    "RecvWater": "Receiving water",
+    "FacName": "Facility name",
+    "BMP_Type": "Stormwater facility type",
+    "DistrictName2": "Collection area",
+    "Agency": "Source-listed agency",
+    "AGENCY": "Source-listed agency",
+    "AGENCYURL": "Published agency website",
+    "Website2": "Published information website",
+    "DISTRICTID": "Leaf section",
+    "SCHEDULE": "Published schedule type",
+    "DESCRIPT": "Published collection windows",
+    "LASTUPDATE": "Source last updated (UTC)",
+    "Info": "Published collection instructions",
+    "Status": "Published status",
+    "Trail": "Trail name",
+    "Trail_Type": "Trail type",
+    "Type": "Facility type",
+    "Path_Type": "Path type",
+    "Miles": "Length (miles)",
+    "WidthSurfacePathAlignment": "Published path width / surface / alignment",
+    "Surface": "Surface",
+    "HUC12": "Watershed HUC12",
+    "Operator": "Source-listed operator",
+    "Permit": "Published permit"
+  },
+  "map_groups": [
+    {
+      "id": "streets",
+      "label": "Streets"
+    },
+    {
+      "id": "snow",
+      "label": "Snow routes"
+    },
+    {
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "id": "recreation",
+      "label": "Recreation"
+    },
+    {
+      "id": "watersheds",
+      "label": "Watersheds"
+    },
+    {
+      "id": "parking",
+      "label": "Parking districts"
+    },
+    {
+      "id": "places",
+      "label": "City places"
+    }
+  ],
+  "map_layers": [
+    {
+      "id": "streets",
+      "group": "streets",
+      "label": "Streets",
+      "color": "#166a99",
+      "geometry": "line",
+      "default": true,
+      "api_default": true
+    },
+    {
+      "id": "snow",
+      "group": "snow",
+      "label": "Snow routes",
+      "geometry": "line",
+      "default": true,
+      "variant_param": "snow_types",
+      "api_default": true
+    },
+    {
+      "id": "leaves",
+      "group": "collection",
+      "label": "Seasonal loose leaves",
+      "color": "#b75b16",
+      "geometry": "polygon",
+      "default": true
+    },
+    {
+      "id": "bulk",
+      "group": "collection",
+      "label": "Bulk waste area",
+      "color": "#8c467a",
+      "geometry": "polygon"
+    },
+    {
+      "id": "parks",
+      "group": "recreation",
+      "label": "Parks",
+      "color": "#328044",
+      "geometry": "polygon"
+    },
+    {
+      "id": "trails",
+      "group": "recreation",
+      "label": "Walking trails",
+      "color": "#008578",
+      "geometry": "line"
+    },
+    {
+      "id": "bike_racks",
+      "group": "recreation",
+      "label": "Bike racks",
+      "color": "#873ca5",
+      "geometry": "point"
+    },
+    {
+      "id": "bike_routes",
+      "group": "recreation",
+      "label": "Bike routes",
+      "color": "#c14b6b",
+      "geometry": "line"
+    },
+    {
+      "id": "watersheds",
+      "group": "watersheds",
+      "label": "Watersheds",
+      "color": "#467da9",
+      "geometry": "polygon"
+    },
+    {
+      "id": "parking",
+      "group": "parking",
+      "label": "Residential parking districts",
+      "color": "#64748b",
+      "geometry": "polygon"
+    },
+    {
+      "id": "places",
+      "group": "places",
+      "label": "Points of interest",
+      "color": "#1f2937",
+      "geometry": "point"
+    }
+  ],
+  "sources": [
+    {
+      "key": "Manassas_Government_Services_WFL1/0",
+      "dataset": "base",
+      "category": "Other services",
+      "record_type": "place",
+      "dedupe_attributes": true,
+      "description_fields": [
+        "Details",
+        "Address2",
+        "City",
+        "State",
+        "Zip",
+        "Phone"
+      ],
+      "description_fallback": "Place listed in the city-published government services directory.",
+      "official_url_field": "Website2",
+      "details": {
+        "strings": [
+          "Address2",
+          "City",
+          "State",
+          "Zip",
+          "Phone"
+        ]
+      }
+    },
+    {
+      "key": "Snow_Routes/0",
+      "dataset": "base",
+      "category": "Streets & sidewalks",
+      "record_type": "route",
+      "details": {
+        "strings": [
+          "NAME",
+          "TYPE"
+        ]
+      },
+      "resident_description": {
+        "title_fields": [
+          "PREFIX",
+          "NAME",
+          "TYPE",
+          "SUFFIX"
+        ],
+        "fallback_to_name": true,
+        "template": "{title} — {classification} in the city-published snow-route snapshot. This classification is not a live plowing status or promised service time."
+      },
+      "map": {
+        "layer": "snow",
+        "classification": "Tertiary Route",
+        "variant": "0",
+        "color": "#755132"
+      }
+    },
+    {
+      "key": "Snow_Routes/1",
+      "dataset": "base",
+      "category": "Streets & sidewalks",
+      "record_type": "route",
+      "details": {
+        "strings": [
+          "NAME",
+          "TYPE"
+        ]
+      },
+      "resident_description": {
+        "title_fields": [
+          "PREFIX",
+          "NAME",
+          "TYPE",
+          "SUFFIX"
+        ],
+        "fallback_to_name": true,
+        "template": "{title} — {classification} in the city-published snow-route snapshot. This classification is not a live plowing status or promised service time."
+      },
+      "map": {
+        "layer": "snow",
+        "classification": "Second Run Route",
+        "variant": "1",
+        "color": "#14786c"
+      }
+    },
+    {
+      "key": "Snow_Routes/2",
+      "dataset": "base",
+      "category": "Streets & sidewalks",
+      "record_type": "route",
+      "details": {
+        "strings": [
+          "NAME",
+          "TYPE"
+        ]
+      },
+      "resident_description": {
+        "title_fields": [
+          "PREFIX",
+          "NAME",
+          "TYPE",
+          "SUFFIX"
+        ],
+        "fallback_to_name": true,
+        "template": "{title} — {classification} in the city-published snow-route snapshot. This classification is not a live plowing status or promised service time."
+      },
+      "map": {
+        "layer": "snow",
+        "classification": "First Run Route",
+        "variant": "2",
+        "color": "#6957b2"
+      }
+    },
+    {
+      "key": "Snow_Routes/3",
+      "dataset": "base",
+      "category": "Streets & sidewalks",
+      "record_type": "route",
+      "details": {
+        "strings": [
+          "NAME",
+          "PREFIX",
+          "TYPE",
+          "SUFFIX",
+          "ZIPL",
+          "ZIPR"
+        ],
+        "numbers": [
+          "L_F_ADD",
+          "L_T_ADD",
+          "R_F_ADD",
+          "R_T_ADD"
+        ]
+      },
+      "resident_description": {
+        "title_fields": [
+          "PREFIX",
+          "NAME",
+          "TYPE",
+          "SUFFIX"
+        ],
+        "fallback_to_name": true,
+        "template": "{title} — {classification} in the city-published snow-route snapshot. This classification is not a live plowing status or promised service time."
+      },
+      "map": {
+        "layer": "snow",
+        "classification": "Snow Emergency Route",
+        "variant": "3",
+        "color": "#ab3e45"
+      }
+    },
+    {
+      "key": "watermain_breaks_view/0",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "outage",
+      "description": "Historical water-main break record; not current outage status. This source does not establish an active interruption or repair status.",
+      "details": {
+        "strings": [
+          "LOCDESC",
+          "BREAKLEAK_TYPE"
+        ],
+        "numbers": [
+          "INCIDENTDATE",
+          "REPAIRDATE"
+        ]
+      },
+      "notice": "Historical incident information only — not current outage or repair status."
+    },
+    {
+      "key": "COM_StormData_Public_View/0",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure"
+    },
+    {
+      "key": "COM_StormData_Public_View/1",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure"
+    },
+    {
+      "key": "COM_StormData_Public_View/2",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure"
+    },
+    {
+      "key": "COM_StormData_Public_View/3",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure",
+      "details": {
+        "strings": [
+          "Location",
+          "DischType",
+          "Material",
+          "RecvWater"
+        ]
+      }
+    },
+    {
+      "key": "COM_StormData_Public_View/4",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure"
+    },
+    {
+      "key": "COM_StormData_Public_View/5",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure"
+    },
+    {
+      "key": "COM_StormData_Public_View/6",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure"
+    },
+    {
+      "key": "COM_StormData_Public_View/7",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure"
+    },
+    {
+      "key": "COM_StormData_Public_View/8",
+      "dataset": "base",
+      "category": "Water & sewer",
+      "record_type": "infrastructure",
+      "details": {
+        "strings": [
+          "FacName",
+          "BMP_Type"
+        ]
+      }
+    },
+    {
+      "key": "Manassas_Bulk_Waste_Collection/0",
+      "dataset": "base",
+      "category": "Trash & recycling",
+      "record_type": "route",
+      "official_url_link": "trash_guidance",
+      "details": {
+        "strings": [
+          "DistrictName2",
+          "Agency",
+          "Phone",
+          "Website2"
+        ]
+      },
+      "source_link_fields": [
+        "OBJECTID",
+        "DistrictName2",
+        "Agency",
+        "Phone",
+        "Website2"
+      ],
+      "caveats": {
+        "agency_caveat": "Source-listed agency, not independently verified current operator. No schedule is published on this polygon."
+      },
+      "map": {
+        "layer": "bulk",
+        "classification": "Bulk waste collection area"
+      }
+    },
+    {
+      "key": "Centerline_COM/0",
+      "dataset": "base",
+      "category": "Streets & sidewalks",
+      "record_type": "route",
+      "details": {
+        "strings": [
+          "FULLSTREET",
+          "NAME",
+          "PREFIX",
+          "TYPE",
+          "SUFFIX",
+          "ZIPL",
+          "ZIPR"
+        ],
+        "numbers": [
+          "L_F_ADD",
+          "L_T_ADD",
+          "R_F_ADD",
+          "R_T_ADD",
+          "SPEEDLIMIT"
+        ]
+      },
+      "resident_description": {
+        "title_fields": [
+          "FULLSTREET"
+        ],
+        "template": "{title}: city-published street centerline. Segment details describe the stored GIS snapshot, not current road conditions or service responsibility."
+      },
+      "street_grouping": true,
+      "map": {
+        "layer": "streets",
+        "classification": "Centerline"
+      }
+    },
+    {
+      "key": "Leaf_Collection_Sections/0",
+      "dataset": "expansion",
+      "category": "Trash & recycling",
+      "record_type": "route",
+      "title_field": "NAME",
+      "name_template": "Leaf collection — {NAME}",
+      "description_template": "Seasonal loose-leaf collection section. Published collection windows: {DESCRIPT}. {Info} This is not regular trash or bagged yard-waste pickup.",
+      "instructions_field": "Info",
+      "official_url_field": "AGENCYURL",
+      "default_visible": true,
+      "schedule_fields": [
+        "SCHEDULE",
+        "DESCRIPT"
+      ],
+      "schedule_scope": "seasonal loose leaves only; source windows omit year",
+      "details": {
+        "strings": [
+          "DISTRICTID",
+          "NAME",
+          "AGENCY",
+          "AGENCYURL",
+          "PHONE",
+          "SCHEDULE",
+          "DESCRIPT",
+          "Info",
+          "COLOR"
+        ],
+        "numbers": [
+          "LASTUPDATE"
+        ],
+        "multiline": [
+          "DESCRIPT"
+        ]
+      },
+      "caveats": {
+        "schedule_caveat": "Published seasonal windows; year not stated. Confirm current season on the official map. Not a next-pickup prediction."
+      },
+      "notice": "Published seasonal windows; year is unspecified. Confirm the current season on the official leaf map. These are not regular yard-waste pickup dates.",
+      "map": {
+        "layer": "leaves",
+        "classification": "Seasonal loose-leaf collection"
+      }
+    },
+    {
+      "key": "Parks_Manassas/0",
+      "dataset": "expansion",
+      "category": "Parks & recreation",
+      "record_type": "place",
+      "title_field": "NAME",
+      "details": {
+        "strings": [
+          "NAME",
+          "Status"
+        ]
+      },
+      "map": {
+        "layer": "parks",
+        "classification": "Park"
+      }
+    },
+    {
+      "key": "Manassas_WalkingTrails/0",
+      "dataset": "expansion",
+      "category": "Parks & recreation",
+      "record_type": "route",
+      "title_field": "Trail",
+      "name_template": "Walking trail {Trail}",
+      "details": {
+        "strings": [
+          "Trail_Type"
+        ],
+        "numbers": [
+          "Trail"
+        ]
+      },
+      "map": {
+        "layer": "trails",
+        "classification": "Walking trail"
+      }
+    },
+    {
+      "key": "Bike_Facilities_and_Racks/0",
+      "dataset": "expansion",
+      "category": "Streets & sidewalks",
+      "record_type": "place",
+      "title_field": "Type",
+      "details": {
+        "strings": [
+          "Type"
+        ]
+      },
+      "map": {
+        "layer": "bike_racks",
+        "classification": "Bike rack"
+      }
+    },
+    {
+      "key": "Bike_Facilities_and_Racks/1",
+      "dataset": "expansion",
+      "category": "Streets & sidewalks",
+      "record_type": "route",
+      "title_field": "Name",
+      "details": {
+        "strings": [
+          "Path_Type",
+          "Status",
+          "WidthSurfacePathAlignment",
+          "Name",
+          "Surface"
+        ],
+        "nonnegative": [
+          "Miles"
+        ]
+      },
+      "map": {
+        "layer": "bike_routes",
+        "classification": "Bike route"
+      }
+    },
+    {
+      "key": "MS4_Watershed/0",
+      "dataset": "expansion",
+      "category": "Water & sewer",
+      "record_type": "infrastructure",
+      "title_field": "Name",
+      "details": {
+        "strings": [
+          "Name",
+          "HUC12",
+          "Operator",
+          "Permit"
+        ]
+      },
+      "notice": "Watershed context only; not an incident or drainage-routing determination.",
+      "map": {
+        "layer": "watersheds",
+        "classification": "Watershed context"
+      }
+    },
+    {
+      "key": "ParkingDistricts2/0",
+      "dataset": "expansion",
+      "category": "Streets & sidewalks",
+      "record_type": "route",
+      "title_field": "District_Desc",
+      "name_template": "Parking district — {District_Desc}",
+      "name_fallback": "Parking district {_id}",
+      "description_template": "Residential parking district ({Type}). Posted restriction: {Hours} Permits, exceptions and enforcement are on the City parking page; this map is not a permit determination.",
+      "instructions": "See the official City parking page for permit rules and exceptions.",
+      "official_url_field": "Info",
+      "extra_attributes": [
+        "Info"
+      ],
+      "exclude": {
+        "require_values": {
+          "Status": "Approved"
+        }
+      },
+      "details": {
+        "strings": [
+          "District_Desc",
+          "Type",
+          "Hours",
+          "Status"
+        ]
+      },
+      "map": {
+        "layer": "parking",
+        "classification": "Residential parking district"
+      }
+    },
+    {
+      "key": "Points_of_Interest_2023/0",
+      "dataset": "expansion",
+      "category": "Other services",
+      "record_type": "place",
+      "title_field": "NAME",
+      "description_template": "{_type_label} at {ADDRESS} — city-published point of interest. Published details are a snapshot, not proof of hours, access or services.",
+      "type_label": {
+        "field": "TYPE",
+        "fallback": "Point of interest"
+      },
+      "instructions": "Check the official website for current hours and services.",
+      "official_url_field": "WEBSITE",
+      "extra_attributes": [
+        "NAME",
+        "WEBSITE"
+      ],
+      "disambiguate": {
+        "field": "ADDRESS",
+        "strip_from": " Manassas"
+      },
+      "exclude": {
+        "require_fields": [
+          "NAME",
+          "ADDRESS"
+        ],
+        "require_point": true,
+        "duplicate_of": {
+          "source_prefix": "Manassas_Government_Services",
+          "rules": [
+            {
+              "max_meters": 60,
+              "min_shared_tokens": 1
+            },
+            {
+              "max_meters": 300,
+              "min_shared_tokens": 2
+            }
+          ],
+          "stopwords": [
+            "the",
+            "of",
+            "and",
+            "at",
+            "for",
+            "manassas",
+            "city",
+            "va",
+            "pwc",
+            "s"
+          ]
+        }
+      },
+      "details": {
+        "strings": [
+          "ADDRESS"
+        ]
+      },
+      "map": {
+        "layer": "places",
+        "classification": "Point of interest"
+      }
+    }
+  ]
+}

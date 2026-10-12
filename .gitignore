@@ -1,0 +1,49 @@
+# Secrets and local configuration
+.env
+.env.*
+*.env
+!*.env.example
+!*.env.template
+*.pem
+*.key
+secrets/
+# Dependencies, binaries, model weights and caches
+node_modules/
+target/
+dist/
+.venv/
+venv/
+.cache/
+__pycache__/
+*.pyc
+*.tsbuildinfo
+.DS_Store
+# Generated evidence and runtime data
+*.log
+*.png
+*.jpg
+*.sqlite*
+*.db
+frontend/evidence/
+# GIS downloads contain audit-only source metadata; regenerate locally
+catalog/raw/
+catalog/map_expansion_raw/
+catalog/map_expansion_evidence/
+catalog/*.json
+!catalog/sources.json
+
+# Local evidence, credentials and dumps
+backend/relevance-results.json
+backend/semantic-calibration.json
+embeddings/verification.json
+embeddings/model-manifest.json
+frontend/*evidence*.json
+*.sql.gz
+*.dump
+*.backup
+*.p12
+*.pfx
+.netrc
+.npmrc
+.aws/
+.ssh/

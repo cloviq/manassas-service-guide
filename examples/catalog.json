@@ -1,0 +1,34 @@
+[
+  {
+    "id": "90000000-0000-4000-8000-000000000001",
+    "name": "Example service (fictional)",
+    "description": "Project-authored synthetic record for local importer testing. No real service information.",
+    "category": "Other services",
+    "provider_name": "Example provider (fictional)",
+    "jurisdiction": "Example jurisdiction (fictional)",
+    "official_url": "https://example.org/services",
+    "source_url": "https://example.org/synthetic-catalog",
+    "instructions": "Synthetic example only. No requests reach a real provider.",
+    "record_type": "service",
+    "source_key": "synthetic/0",
+    "source_record_id": "1",
+    "attributes": {},
+    "geometry": null
+  },
+  {
+    "id": "90000000-0000-4000-8000-000000000002",
+    "name": "Example place (fictional)",
+    "description": "Project-authored synthetic record for local importer testing. No real service information.",
+    "category": "Other services",
+    "provider_name": "Example provider (fictional)",
+    "jurisdiction": "Example jurisdiction (fictional)",
+    "official_url": "https://example.org/services",
+    "source_url": "https://example.org/synthetic-catalog",
+    "instructions": "Synthetic example only. No requests reach a real provider.",
+    "record_type": "place",
+    "source_key": "synthetic/0",
+    "source_record_id": "2",
+    "attributes": {},
+    "geometry": null
+  }
+]
