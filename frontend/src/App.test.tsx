@@ -141,7 +141,7 @@ test('searches the API and presents server-provided responsibility and official 
  await waitFor(() => expect(fetcher).toHaveBeenLastCalledWith('/api/services?q=leaking+pipe&category=&type=service&limit=20&offset=0', expect.any(Object)));
  expect(await screen.findByText('Test provider')).toBeVisible();
  expect(screen.getByText('Test jurisdiction')).toBeVisible();
- expect(screen.getByRole('link', {name: 'Official next action'})).toHaveAttribute('href', item.official_url);
+ expect(screen.getByRole('link', {name: 'Official service information'})).toHaveAttribute('href', item.official_url);
 });
 test('category selection searches with the displayed category and supports clearing it', async () => {
  const fetcher = vi.fn(() => response({items: [], search_mode: 'hybrid'})); vi.stubGlobal('fetch', fetcher);
@@ -199,7 +199,7 @@ test.each(['javascript:alert(1)', 'data:text/html,bad', '//example.org', 'not-a-
  vi.stubGlobal('fetch', vi.fn(() => response({items: [{...item, official_url: url}], search_mode: 'hybrid'})));
  render(<App/>); await userEvent.setup().click(screen.getByRole('button', {name: 'Search'}));
  await screen.findByText(item.name);
- expect(screen.queryByRole('link', {name: 'Official next action'})).not.toBeInTheDocument();
+ expect(screen.queryByRole('link', {name: 'Official service information'})).not.toBeInTheDocument();
  expect(screen.getByText('Official link unavailable')).toBeVisible();
 });
 test('failed demo requests preserve the draft and allow retry without false success', async () => {
@@ -217,6 +217,7 @@ test('keeps the landing concise with a prototype pill and full provenance in col
  expect(screen.getByText('Independent prototype')).toBeVisible();
  await user.tab(); expect(screen.getByRole('button', {name: 'Find a service'})).toHaveFocus();
  await user.tab(); expect(screen.getByRole('button', {name: 'Explore map'})).toHaveFocus();
+ await user.tab(); expect(screen.getByRole('link', {name: 'Learn waste collection'})).toHaveFocus();
  await user.tab(); expect(screen.getByRole('searchbox')).toHaveFocus();
  await user.keyboard('test{Enter}'); await screen.findByText(item.name);
  const about = screen.getByText('About this prototype').closest('details');

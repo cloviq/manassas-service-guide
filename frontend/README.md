@@ -139,3 +139,13 @@ page; they need a signed-in browser session to exercise the guide.
 
 MapLibre/OSM attribution remains visible. See
 [third-party notices](../THIRD-PARTY-NOTICES.md) and [data rights](../DATA-REUSE.md).
+
+## Waste collection learning journey (2026-11-10)
+
+`/waste-collection.html` is a first-class, six-step learning page linked from the main navigation and the existing collection guidance on the finder/map. It keeps the current service finder and map intact. Vite serves `public/waste-collection.html` and `public/waste-collection.css` directly and copies them unchanged into `dist/`; the Nginx exact-route session guard uses the existing `/api/auth/me` endpoint. Signed-out users are redirected to sign-in with a relative URL; denied or unavailable authentication does not serve the page. Responses are private/no-store.
+
+After sign-in, the page and its native-disclosure glass-sorting exercise need **no JavaScript**. Each page request still checks the API-backed session. The app's `noscript` fallback links to it; sign-in and search/map still require JavaScript. Vite dev/preview is loopback-only and does **not** enforce the Nginx guard; never expose that preview as the deployed app. It collects no addresses or answers, assigns no pickup day, and sends no City requests. Each claim links to current primary guidance, with review dates, seasonal/map limits, and explicit conflict notes. The source review does not certify unrelated API records.
+
+See [source review](../docs/WASTE-SOURCES.md) and [verification](../docs/WASTE-VERIFICATION.md). The new `WasteJourney.test.tsx` imports the actual static HTML and checks integration, six-section structure, anchors, no script dependency, all three exercise explanations/repeated toggles, critical bulk rules, source destinations, and the no-JavaScript landing link. `raw.d.ts` declares only HTML raw imports, avoiding unrelated changes to Vite asset typing.
+
+Optional session-route smoke (requires Docker and built dist): `python3 frontend/scripts/check-waste-session.py` from the repository root. It runs official Nginx in an isolated, network-disabled container with a fake session endpoint, not a live account or database. It checks valid/missing/invalid/forbidden sessions, upstream failure, relative redirects, internal-route protection, HEAD and normalized paths. This is not a live authentication integration test.
