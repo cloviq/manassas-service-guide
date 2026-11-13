@@ -71,6 +71,24 @@ class ContainerTests(unittest.TestCase):
                       'reindex=1'):
             self.assertIn(guard, script)
 
+    def test_waste_journey_requires_existing_session(self):
+        nginx = (ROOT / 'frontend/nginx.conf').read_text()
+        journey = nginx.split('location = /waste-collection.html {', 1)
+        self.assertEqual(len(journey), 2, 'The static learning page must retain the sign-in boundary')
+        protected = journey[1].split('}', 1)[0]
+        self.assertIn('auth_request /_waste_auth;', protected)
+        self.assertIn('error_page 401 = @waste_sign_in;', protected)
+        redirect = nginx.split('location @waste_sign_in {', 1)[1].split('}', 1)[0]
+        self.assertIn('absolute_redirect off;', redirect)
+        self.assertIn('return 302 /;', redirect)
+        self.assertIn('try_files $uri =404;', protected)
+        self.assertIn('Cache-Control "private, no-store"', protected)
+        check = nginx.split('location = /_waste_auth {', 1)[1].split('}', 1)[0]
+        self.assertIn('internal;', check)
+        self.assertIn('proxy_pass http://api:3001/api/auth/me;', check)
+        self.assertIn('proxy_pass_request_body off;', check)
+        self.assertIn('proxy_set_header Cookie $http_cookie;', check)
+
     def test_stack_is_local_only(self):
         compose = (ROOT / 'compose.yaml').read_text()
         self.assertIn('name: manassas-service-guide\n', compose)
