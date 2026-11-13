@@ -26,11 +26,12 @@ is downloaded from public ArcGIS services when you run the project; see
 | `catalog/sources.json` | JSON | Source registry shared by the collectors, backend and frontend |
 | `scripts/` | Python 3 (stdlib), Bash | GIS collectors, data bootstrap, developer launcher, offline tests |
 
-Docker Compose (`compose.yaml`, project name `manassas-service-guide`) runs five
+Docker Compose (`compose.yaml`, project name `manassas-service-guide-v2`) runs five
 services: `postgres`, `opensearch`, `embeddings`, `api` and `web` (nginx serving
 the built SPA and proxying `/api` to the API). Only the web UI (5174), PostgreSQL
 (5433) and OpenSearch (9200) are published, and only on `127.0.0.1`. The API and
-embedding service are reachable only inside the Compose network.
+embedding service are reachable only inside the Compose network. An optional
+`tailscale` service publishes the authenticated web UI through Tailscale Funnel.
 
 Search combines a BM25 keyword leg (with a small set of civic synonyms such as
 garbage/trash/refuse) and a semantic vector leg gated by a minimum cosine
@@ -107,12 +108,59 @@ SKIP_DATA=1 make up    # start services without the data/admin step
 make stack-import      # force a catalog re-import (in a container, no host Cargo)
 make stack-index       # force a full search reindex
 make docker-build      # build images only
+make funnel-up         # publish the authenticated UI through Tailscale Funnel
+make funnel-down       # stop Funnel; keep its node identity
 ```
 
 `make down` never deletes volumes. To start completely fresh, remove the Compose
 volumes yourself (`bash scripts/infra.sh down -v`), which
 deletes the database, the search index and all accounts. Set `DOCKER_CONTEXT=name`
 to target a specific Docker context without changing your global default.
+
+### Upgrading the existing installation
+
+Keep the Compose project name `manassas-service-guide-v2` and the volume keys
+`pg_data`, `search_data`, `model_cache` and `ts_state`. They identify the existing
+database, search index, downloaded model and Tailscale node. Keep `backend/dev.env`
+and `secrets/` in place as well; do not regenerate credentials for an existing
+database or use `down -v` during an upgrade.
+
+Migrations 0001, 0005 and 0006 retain the exact bytes used by the original
+installation. The public baseline had edited comments in those files, which
+changed their SQLx checksums despite leaving the schema unchanged. Restoring the
+original files lets that installation upgrade without rewriting its migration
+history or converting data. Add future schema changes as new migration files.
+
+For an application-only upgrade that keeps the existing catalog and search index:
+
+```sh
+SKIP_DATA=1 make up
+make funnel-up         # when Funnel is already configured for this installation
+make status
+```
+
+The API still checks/applies SQLx migrations on startup. Skipping data bootstrap
+avoids a catalog download, re-import and reindex when only application code is
+being updated. Use ordinary `make up` when a catalog refresh is intended.
+
+### Tailscale Funnel
+
+The opt-in `funnel` profile runs a dedicated Tailscale node named `manassas`.
+It forwards HTTPS to `web:80`, so the API sessions and waste-page sign-in guard
+still apply. Its node identity and certificates persist in `ts_state`; upgrades
+keep the existing Funnel hostname. The host's Tailscale settings are unchanged.
+
+For a new installation, allow `tag:manassas` in your tailnet's tag owners and
+grant the `funnel` node attribute to that tag. Put a tagged, pre-approved auth key
+in `secrets/ts-authkey` with mode 0600. Keep that file available for the bind mount;
+`TS_AUTH_ONCE` reuses the persisted node rather than signing in again on restart.
+The key is git-ignored and is never copied into an application image.
+
+After `make up`, run `make funnel-up`. `make status` includes the sidecar, and
+`bash scripts/infra.sh --profile funnel exec tailscale tailscale funnel status`
+shows its HTTPS address. `make funnel-down` stops only the sidecar and preserves
+state; `make down` stops all services while preserving all named volumes.
+Ordinary `make up` does not enable public access on a new installation.
 
 ## Accounts and administration
 

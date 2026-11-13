@@ -1,6 +1,6 @@
 -- Additive: service tasks for the Electricity, Water & sewer, Streets & sidewalks
 -- and Other services categories. Text uses only facts stated on the cited official
--- pages; confirm current details at the source.
+-- pages (verified live 2026-10-05); confirm current details at the source.
 INSERT INTO providers (id,name,jurisdiction,official_url) VALUES
 ('10000000-0000-4000-8000-000000000003','City of Manassas Electric Department','City of Manassas, Virginia','https://www.manassasva.gov/electric_water___sewer/index.php'),
 ('10000000-0000-4000-8000-000000000004','City of Manassas Water & Sewer','City of Manassas, Virginia','https://www.manassasva.gov/city_departments/water___sewer/sewer/index.php'),

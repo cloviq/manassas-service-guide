@@ -27,7 +27,7 @@ INSERT INTO providers (id,name,jurisdiction,official_url) VALUES
 ('10000000-0000-4000-8000-000000000001','City of Manassas Refuse & Recycling','City of Manassas, Virginia','https://www.manassasva.gov/public_works/trash___recycling/index.php')
 ON CONFLICT (id) DO NOTHING;
 
--- Small, deliberately bounded catalog summarizing the cited official City page.
+-- Small, deliberately bounded catalog. Source supplied and verified in project research.
 -- Do not infer contacts, eligibility, or response SLAs from these descriptions.
 INSERT INTO services (id,provider_id,name,description,category,official_url,source_url,instructions)
 SELECT id::uuid,'10000000-0000-4000-8000-000000000001'::uuid,name,description,'Trash & recycling',

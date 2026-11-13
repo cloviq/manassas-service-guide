@@ -1,6 +1,6 @@
 -- Additive: snow service tasks. Snow-route geometry is map data, not a service a
 -- resident acts on. Text uses only facts stated on the cited official pages
--- Confirm current details at the source.
+-- (verified live 2026-10-05); confirm current details at the source.
 INSERT INTO providers (id,name,jurisdiction,official_url) VALUES
 ('10000000-0000-4000-8000-000000000002','City of Manassas Street Department (Snow Removal)','City of Manassas, Virginia','https://www.manassasva.gov/public_works/street_department/snow_removal/index.php')
 ON CONFLICT (id) DO NOTHING;
