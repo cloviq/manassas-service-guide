@@ -35,7 +35,7 @@ test-catalog:
 test-workflow:
 	"$(PYTHON)" scripts/workflow_test.py
 
-.PHONY: vm up down status logs stack-import stack-index docker-build host-api host-web host-embeddings test-containers
+.PHONY: vm up down status logs funnel-up funnel-down stack-import stack-index docker-build host-api host-web host-embeddings test-containers
 # macOS: dedicated small VM + Docker context `colima-manassas` (2 CPU / 4 GiB).
 vm:
 	colima start --profile manassas --cpu 2 --memory 4 --disk 40 --vm-type vz --mount-type virtiofs
@@ -51,11 +51,17 @@ up: docker-build
 	bash scripts/infra.sh up -d --no-build --wait --wait-timeout 900
 	@if [ -z "$(SKIP_DATA)" ]; then bash scripts/stack-data.sh ensure; fi
 down:
-	bash scripts/infra.sh down
+	bash scripts/infra.sh --profile funnel down
 status:
-	bash scripts/infra.sh ps
+	bash scripts/infra.sh --profile funnel ps
 logs:
-	bash scripts/infra.sh logs --tail=100
+	bash scripts/infra.sh --profile funnel logs --tail=100
+# Publish the authenticated UI; existing Tailscale identity stays in ts_state.
+funnel-up:
+	@test -f secrets/ts-authkey || { printf '%s\n' 'Missing secrets/ts-authkey (tagged Tailscale auth key). See README.' >&2; exit 1; }
+	bash scripts/infra.sh --profile funnel up -d --no-build --wait --wait-timeout 300 tailscale
+funnel-down:
+	bash scripts/infra.sh --profile funnel stop tailscale
 # Container-only equivalents of data-import/index (no host Cargo needed).
 stack-import:
 	bash scripts/stack-data.sh import
@@ -102,6 +108,7 @@ help:
 	  '  vm                macOS: create/start the 2 CPU / 4 GiB Colima VM' \
 	  '  up                Build, start, then ensure catalog/index/first admin (SKIP_DATA=1 to skip)' \
 	  '  docker-build      Sequential image builds only; no startup or data fetch' \
+	  '  funnel-up / funnel-down  Publish/unpublish via Tailscale Funnel (opt-in)' \
 	  '  stack-import / stack-index  Force catalog import / EXPENSIVE full reindex' \
 	  '  host-api / host-web / host-embeddings  Explicit host dev aliases' \
 	  'Local development (see README.md for prerequisites and separate-shell startup):' \

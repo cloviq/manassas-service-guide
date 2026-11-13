@@ -1,4 +1,5 @@
-name: manassas-service-guide
+# Keep the installed project identity: it also names the persistent volumes.
+name: manassas-service-guide-v2
 services:
   postgres:
     image: postgres:17-alpine
@@ -108,7 +109,38 @@ services:
       timeout: 5s
       retries: 10
     restart: unless-stopped
+  tailscale:
+    # Opt-in public ingress; keep the node identity in ts_state across upgrades.
+    image: tailscale/tailscale:v1.102.4
+    profiles: [funnel]
+    environment:
+      TS_AUTHKEY: file:/run/secrets/ts-authkey
+      TS_AUTH_ONCE: "true"
+      TS_HOSTNAME: manassas
+      TS_EXTRA_ARGS: --advertise-tags=tag:manassas
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_SERVE_CONFIG: /config/serve.json
+      TS_USERSPACE: "true"
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_LOCAL_ADDR_PORT: 127.0.0.1:9002
+    volumes:
+      - ts_state:/var/lib/tailscale
+      - ./tailscale/serve.json:/config/serve.json:ro
+      - ./secrets/ts-authkey:/run/secrets/ts-authkey:ro
+    depends_on:
+      web:
+        condition: service_healthy
+    mem_limit: 128m
+    cpus: 0.25
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9002/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    restart: unless-stopped
 volumes:
   pg_data:
   search_data:
   model_cache:
+  ts_state:
